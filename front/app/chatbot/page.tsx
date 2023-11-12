@@ -9,17 +9,19 @@ interface QNA {
 
 const randomAnswer = () => {
   const random = Math.random();
+  let answer = '안녕하세요';
+
   if (random < 0.2) {
-    return '안녕하세요';
+    answer = '다시 말해봐';
   } else if (random < 0.4) {
-    return 'GPT한테 물어봐';
+    answer = 'GPT한테 물어봐';
   } else if (random < 0.6) {
-    return '내가 어떻게 알아 이 새끼야';
+    answer = '내가 어떻게 알아 이 새끼야';
   } else if (random < 0.8) {
-    return '뭐라고?';
-  } else {
-    return '다시 말해봐';
+    answer = '뭐라고?';
   }
+
+  return answer;
 };
 
 export default function ChatbotPage() {

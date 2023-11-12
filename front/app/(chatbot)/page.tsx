@@ -18,6 +18,8 @@ const randomAnswer = () => {
     answer = '내가 어떻게 알아 이 새끼야';
   } else if (random < 0.8) {
     answer = '뭐라고?';
+  } else {
+    answer = '김동규가 알겠지';
   }
 
   return answer;

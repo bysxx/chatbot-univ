@@ -1,12 +1,26 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 
 interface QNA {
   question: string;
   answer: string;
 }
+
+const randomAnswer = () => {
+  const random = Math.random();
+  if (random < 0.2) {
+    return '안녕하세요';
+  } else if (random < 0.4) {
+    return 'GPT한테 물어봐';
+  } else if (random < 0.6) {
+    return '내가 어떻게 알아 이 새끼야';
+  } else if (random < 0.8) {
+    return '뭐라고?';
+  } else {
+    return '다시 말해봐';
+  }
+};
 
 export default function ChatbotPage() {
   const [qna, setQna] = useState<QNA[]>([{ question: '안녕하세요', answer: '안녕하세요' }]);
@@ -15,7 +29,7 @@ export default function ChatbotPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const question = formData.get('question') as string;
-    setQna([...qna, { question, answer: '안녕하세요' }]);
+    setQna([...qna, { question, answer: randomAnswer() }]);
 
     e.currentTarget.reset();
   };
@@ -28,7 +42,7 @@ export default function ChatbotPage() {
         </div>
       </header>
       <main className="relative flex grow flex-col p-6">
-        <div className="h-[calc(100vh-152px)] space-y-4 overflow-y-scroll">
+        <div className="h-[calc(100vh-208px)] space-y-4 overflow-y-scroll">
           {qna.map((item, index) => (
             <div key={index}>
               <div className="mb-4 flex flex-col items-end space-y-2">
@@ -58,22 +72,6 @@ export default function ChatbotPage() {
           </button>
         </form>
       </main>
-      <footer className="bg-gray-200 p-6 dark:bg-gray-800">
-        <div className="flex justify-around">
-          <Link className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-100" href="#">
-            About
-          </Link>
-          <Link className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-100" href="#">
-            Contact Us
-          </Link>
-          <Link className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-100" href="#">
-            Privacy
-          </Link>
-          <Link className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-100" href="#">
-            Help
-          </Link>
-        </div>
-      </footer>
     </section>
   );
 }

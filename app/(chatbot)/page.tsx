@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import ChatbotHeader from './header';
 import type { QNA } from './interfaces';
@@ -36,8 +36,11 @@ export default function ChatbotPage() {
     setQna([...qna, { question, answer: randomAnswer() }]);
 
     e.currentTarget.reset();
-    ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: 'smooth' });
+  }, [qna]);
 
   return (
     <section className="flex h-screen flex-col justify-between">
